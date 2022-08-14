@@ -1,7 +1,7 @@
 // import React from "react";
 import './App.css';
 import NavbarFrame from "./components/navbar";
-// import Footer from "./components/footer";
+import Footer from "./components/footer";
 // import MyProfile from "./components/MyProfile";
 
 function App(props) {
@@ -9,7 +9,7 @@ function App(props) {
         <div>
             <NavbarFrame/>
             {/*<MyProfile/>*/}
-            {/*<Footer/>*/}
+            <Footer/>
         </div>
     );
 }

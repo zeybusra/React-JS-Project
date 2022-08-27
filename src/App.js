@@ -1,17 +1,28 @@
-// import React from "react";
+import React from "react";
 import './App.css';
-import NavbarFrame from "./components/navbar";
-import Footer from "./components/footer";
-import MyProfile from "./components/MyProfile";
+import Layout from "./components/layout";
+import Login from "./components/login";
+import Signup from "./components/signup";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-function App(props) {
+
+export default function App() {
     return (
-        <div>
-            <NavbarFrame/>
-            <MyProfile/>
-            <Footer/>
-        </div>
+        <BrowserRouter>
+            <Routes>
+
+                <Route path="/" element={<Layout />}>
+                    {/*<Route index element={<Login />} />*/}
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
+                </Route>
+
+                {/*<Route path="/" element={<Layout_LoggedIn />}>*/}
+                {/*    /!*<Route index element={<Login />} />*!/*/}
+                {/*    <Route path="account" element={<Account />} />*/}
+                {/*</Route>*/}
+
+            </Routes>
+        </BrowserRouter>
     );
 }
-
-export default App;

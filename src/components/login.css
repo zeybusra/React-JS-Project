@@ -1,0 +1,10 @@
+.loginButton {
+    justify-content: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+.buttonElement {
+    justify-content: center;
+    display: flex;
+}

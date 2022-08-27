@@ -1,8 +1,9 @@
-// import React from "react";
 import Card from 'react-bootstrap/Card';
 
 
 function CardTemplate(props) {
+    const {name, surname} = props;
+    const full_name = name + " " + surname;
     return (
         <div className={"col-6"}>
             <Card style={{marginTop: "70px"}}>
@@ -18,7 +19,11 @@ function CardTemplate(props) {
                 <Card.Body>
                     <Card.Title style={{display: "flex", justifyContent: "center"}}>Facebook</Card.Title>
                     <Card.Text>
-                        <h6 style={{marginTop:"30px"}}>Kullanıcı adı:</h6>
+
+                        {full_name ?
+                            <h6 style={{marginTop: "30px"}}>Kullanıcı adı: {full_name} </h6>
+                            : null
+                        }
 
                     </Card.Text>
                 </Card.Body>

@@ -1,34 +1,68 @@
 import React from "react";
-// import ReactDOM from 'react-dom'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import Container from 'react-bootstrap/Container';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import TextField from '@mui/material/TextField';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from '@mui/material/Button';
-import "./login.css";
+import "./signup.css";
+import Input from "./inputs/input";
+import PasswordInput from "./inputs/passwordInput";
+import ActionButton from "./inputs/actionButtom";
+import GoogleButton from "./inputs/googleButton";
+import {Link} from "react-router-dom";
+
 
 const Login = () => {
+    const textStyle = {
+        justifyContent: "center",
+        display: "flex",
+        color: "gray",
+        fontWeight: "normal"
+    }
+    const forgetPassword = {
+        justifyContent: "flex-end",
+        display: "flex",
+        marginTop: "10px",
+        color: "#5d5d5d",
+        cursor: "pointer",
+        textDecoration: "none",
+        paddingLeft: "10px"
+    }
+
+    const alignItemStyle = {
+        justifyContent: "center",
+        display: "flex"
+    }
     return (
+
+
         <div>
+            <div className={"row"}>
+                <div className={"col-6"}>
+                    <div className={"leftSideImage"}></div>
+                </div>
 
-            <Container >
-                <Row style={{justifyContent:"center", marginTop:"12%"}}>
-                    <Col md={{ span: 5 }}><TextField fullWidth label="Mail" size="normal" color="secondary" focused /></Col>
-                </Row>
+                <div style={alignItemStyle} className={"col-6"}>
 
-                <Row style={{justifyContent:"center", marginTop:"30px"}}>
-                    <Col md={{ span: 5}}><TextField fullWidth label="Password" size="normal" color="secondary" focused /></Col>
-                    {/*<FontAwesomeIcon style={{color:"black"}} icon="fa-solid fa-eye-slash fa-lg" />*/}
-                </Row>
+                    <div className={"background"}>
+                        <div className="title"><h3>Welcome to Chanel</h3></div>
+                        <div className="col-12">
+                            <Input name="mail" label="Mail"/>
+                        </div>
+                        <div className="col-12">
+                            <PasswordInput name="password" label="Password"/>
+                        </div>
 
-                <Row style={{justifyContent:"center", marginTop:"30px"}}>
-                    <Col className={"buttonElement"}><Button className={"loginButton"} style={{ paddingLeft:"30px", paddingRight:"30px" }} size="large" color="secondary" variant="contained">Login</Button></Col>
-                </Row>
-            </Container>
+                        <Link style={forgetPassword}
+                              to="/">Forget Your Password?</Link>
+                        <ActionButton title="LOGIN"/>
+                        <GoogleButton title="Login With Google"/>
 
+                        <div style={{marginTop: "40px"}}>
+                            <h6 style={textStyle}>Don't have an account?
+                                <Link style={{textDecoration: "none", color: "#9c27b0", paddingLeft: "10px"}}
+                                      to="/signup">Sign up</Link>
+                            </h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

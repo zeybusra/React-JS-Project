@@ -7,11 +7,11 @@ import Footer from "./helper/footer";
 const Layout = () => {
     return (
         <>
-            <Navbar/>
-            <div className="container">
+            {/*<Navbar/>*/}
+            <div>
                 <Outlet/>
             </div>
-            <Footer/>
+            {/*<Footer/>*/}
 
         </>
     )

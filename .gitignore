@@ -165,3 +165,5 @@ dmypy.json
 # Vim
 *.swp
 
+package-lock.json
+

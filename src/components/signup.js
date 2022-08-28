@@ -5,6 +5,7 @@ import PasswordInput from './inputs/passwordInput';
 import ActionButton from './inputs/actionButtom';
 import GoogleButton from './inputs/googleButton';
 import { Link } from 'react-router-dom';
+import LeftSideImage from './inputs/leftSideImage';
 
 const Signup = () => {
     const textStyle = {
@@ -21,11 +22,11 @@ const Signup = () => {
         <div>
             <div className={'row'}>
                 <div className={'col-6'}>
-                    <div className={'leftSideImage'}></div>
+                    <LeftSideImage />
                 </div>
 
                 <div style={alignItemStyle} className={'col-6'}>
-                    <div className={'background'}>
+                    <div className={'authFormContainer'}>
                         <h3 className="title">Welcome to Chanel</h3>
                         <div className="row" style={alignItemStyle}>
                             <div className="col-6">

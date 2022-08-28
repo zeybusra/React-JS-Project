@@ -17,7 +17,7 @@ const GoogleButton = props => {
         <div>
             <Link to="/">
                 <button style={buttonStyle}>
-                    <FontAwesomeIcon icon={faGoogle} />
+                    <FontAwesomeIcon style={{ marginRight: '20px' }} icon={faGoogle} />
                     {title}
                 </button>
             </Link>

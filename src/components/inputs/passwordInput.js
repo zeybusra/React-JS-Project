@@ -5,12 +5,8 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const PasswordInput = props => {
-    const { label, name } = props;
+    const { label, name, onChangeEvent } = props;
     const [passwordType, setPasswordType] = useState('password');
-    const [passwordInput, setPasswordInput] = useState('');
-    const handlePasswordChange = evnt => {
-        setPasswordInput(evnt.target.value);
-    };
     const togglePassword = e => {
         if (passwordType === 'password') {
             setPasswordType('text');
@@ -25,8 +21,7 @@ const PasswordInput = props => {
                 color="secondary"
                 id="outlined-password-input"
                 autoComplete="current-password"
-                onChange={handlePasswordChange}
-                value={passwordInput}
+                onChange={e => onChangeEvent(e.target.value)}
                 label={label}
                 name={name}
                 type={passwordType}

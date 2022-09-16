@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 
 const Input = props => {
-    const { label, name } = props;
+    const { label, name, onChangeEvent } = props;
 
     return (
         <div className="input-text">
@@ -13,6 +13,7 @@ const Input = props => {
                 label={label}
                 name={name}
                 size="small"
+                onChange={e => onChangeEvent(e.target.value)}
             />
         </div>
     );

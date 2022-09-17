@@ -5,7 +5,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const PasswordInput = props => {
-    const { label, name, onChangeEvent } = props;
+    const { label, name, onChangeEvent, required } = props;
     const [passwordType, setPasswordType] = useState('password');
     const togglePassword = e => {
         if (passwordType === 'password') {
@@ -22,10 +22,11 @@ const PasswordInput = props => {
                 id="outlined-password-input"
                 autoComplete="current-password"
                 onChange={e => onChangeEvent(e.target.value)}
-                label={label}
                 name={name}
                 type={passwordType}
                 size="small"
+                label={label}
+                required={required}
             />
             {passwordType === 'password' ? (
                 <FontAwesomeIcon onClick={togglePassword} icon={faEyeSlash} fixedWidth shake />

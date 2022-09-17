@@ -66,22 +66,44 @@ const Signup = props => {
                         <form onSubmit={handleSubmit}>
                             <div className="row" style={alignItemStyle}>
                                 <div className="col-6">
-                                    <Input onChangeEvent={setFirstName} name="name" label="Name" />
+                                    <Input
+                                        onChangeEvent={setFirstName}
+                                        name="name"
+                                        label="Name"
+                                        required={true}
+                                    />
                                 </div>
 
                                 <div className="col-6">
-                                    <Input onChangeEvent={setLastName} name="surname" label="Surname" />
+                                    <Input
+                                        onChangeEvent={setLastName}
+                                        name="surname"
+                                        label="Surname"
+                                        required={true}
+                                    />
                                 </div>
                             </div>
 
                             <div className="row" style={alignItemStyle}>
                                 <div className="col-12">
-                                    <Input onChangeEvent={setEmail} name="mail" label="Mail" />
-                                    <Input onChangeEvent={setUsername} name="username" label="Username" />
+                                    <Input
+                                        onChangeEvent={setEmail}
+                                        name="email"
+                                        label="Mail"
+                                        type={'email'}
+                                        required={true}
+                                    />
+                                    <Input
+                                        onChangeEvent={setUsername}
+                                        name="username"
+                                        label="Username"
+                                        required={true}
+                                    />
                                     <PasswordInput
                                         onChangeEvent={setPassword}
                                         name="password"
                                         label="Password"
+                                        required={true}
                                     />
                                     <ActionButton actionType={'submit'} title="SIGN UP" />
                                     <GoogleButton title="Sign up With Google" />

@@ -7,7 +7,14 @@ import GoogleButton from './inputs/googleButton';
 import { Link } from 'react-router-dom';
 import LeftSideImage from './inputs/leftSideImage';
 
-const Signup = () => {
+const Signup = props => {
+    const { setToken } = props;
+    const [username, setUsername] = React.useState();
+    const [password, setPassword] = React.useState();
+    const [firstName, setFirstName] = React.useState();
+    const [lastName, setLastName] = React.useState();
+    const [email, setEmail] = React.useState();
+
     const textStyle = {
         justifyContent: 'center',
         display: 'flex',
@@ -19,17 +26,32 @@ const Signup = () => {
         display: 'flex',
     };
 
-    const signupButtonClick = () => {
-        fetch(
-            'https://express-js-api.vercel.app/api/v1/login/',
-
-            {
-                method: 'POST',
-                mode: 'cors',
-                body: JSON.stringify(),
-            }
-        );
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const token = await signupUser({
+            username,
+            password,
+            firstName,
+            lastName,
+            email,
+        });
+        setToken(token);
     };
+
+    async function signupUser(body) {
+        return fetch('https://express-js-api.vercel.app/api/v1/signup/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        })
+            .then(data => data.json())
+            .then(json => {})
+            .catch(err => {
+                console.log('error');
+            });
+    }
 
     return (
         <div>
@@ -41,41 +63,47 @@ const Signup = () => {
                 <div style={alignItemStyle} className={'col-6'}>
                     <div className={'authFormContainer'}>
                         <h3 className="title">Welcome to Chanel</h3>
-                        <div className="row" style={alignItemStyle}>
-                            <div className="col-6">
-                                <Input name="name" label="Name" />
-                            </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="row" style={alignItemStyle}>
+                                <div className="col-6">
+                                    <Input onChangeEvent={setFirstName} name="name" label="Name" />
+                                </div>
 
-                            <div className="col-6">
-                                <Input name="surname" label="Surname" />
-                            </div>
-                        </div>
-
-                        <div className="row" style={alignItemStyle}>
-                            <div className="col-12">
-                                <Input name="mail" label="Mail" />
-                                <Input name="phone" label="Phone" />
-                                <PasswordInput name="password" label="Password" />
-                                <ActionButton onclickEvent={signupButtonClick} title="SIGN UP" />
-                                <GoogleButton title="Sign up With Google" />
-
-                                <div style={{ marginTop: '40px' }}>
-                                    <h6 style={textStyle}>
-                                        Already have an account?
-                                        <Link
-                                            style={{
-                                                textDecoration: 'none',
-                                                color: '#9c27b0',
-                                                paddingLeft: '10px',
-                                            }}
-                                            to="/login"
-                                        >
-                                            Login
-                                        </Link>
-                                    </h6>
+                                <div className="col-6">
+                                    <Input onChangeEvent={setLastName} name="surname" label="Surname" />
                                 </div>
                             </div>
-                        </div>
+
+                            <div className="row" style={alignItemStyle}>
+                                <div className="col-12">
+                                    <Input onChangeEvent={setEmail} name="mail" label="Mail" />
+                                    <Input onChangeEvent={setUsername} name="username" label="Username" />
+                                    <PasswordInput
+                                        onChangeEvent={setPassword}
+                                        name="password"
+                                        label="Password"
+                                    />
+                                    <ActionButton actionType={'submit'} title="SIGN UP" />
+                                    <GoogleButton title="Sign up With Google" />
+
+                                    <div style={{ marginTop: '40px' }}>
+                                        <h6 style={textStyle}>
+                                            Already have an account?
+                                            <Link
+                                                style={{
+                                                    textDecoration: 'none',
+                                                    color: '#9c27b0',
+                                                    paddingLeft: '10px',
+                                                }}
+                                                to="/login"
+                                            >
+                                                Login
+                                            </Link>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -106,7 +106,7 @@ const Login = props => {
                             <Link style={forgetPassword} to="/">
                                 Forget Your Password?
                             </Link>
-                            <ActionButton actionType={'submit'} onClickEvent={handleSubmit} title="LOGIN" />
+                            <ActionButton actionType={'submit'} title="LOGIN" />
                             <GoogleButton title="Login With Google" />
                         </form>
                         <div style={{ marginTop: '40px' }}>

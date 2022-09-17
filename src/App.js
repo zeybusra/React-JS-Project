@@ -12,17 +12,13 @@ import { Component } from './TEST';
 export default function App() {
     const [token, setToken] = React.useState();
 
-    // if (!token) {
-    //     return <Redirect setToken={setToken} />;
-    // }
-
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     {/*<Route index element={<Login />} />*/}
                     <Route path="login" element={<Login setToken={setToken} />} />
-                    <Route path="signup" element={<Signup />} />
+                    <Route path="signup" element={<Signup setToken={setToken} />} />
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route path="profile" element={<MyProfile />} />

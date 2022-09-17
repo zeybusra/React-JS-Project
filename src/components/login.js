@@ -15,6 +15,7 @@ const Login = props => {
     const [password, setPassword] = React.useState();
     const [message, setMessage] = React.useState();
     const [severity, setSeverity] = React.useState();
+    const [open, setOpen] = React.useState(false);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -24,7 +25,14 @@ const Login = props => {
         });
         setToken(token);
     };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
+    //Style Start
     const textStyle = {
         justifyContent: 'center',
         display: 'flex',
@@ -45,6 +53,7 @@ const Login = props => {
         justifyContent: 'center',
         display: 'flex',
     };
+    //Style End
 
     async function loginUser(credentials) {
         return fetch('https://express-js-api.vercel.app/api/v1/login/', {
@@ -57,11 +66,18 @@ const Login = props => {
             .then(data => data.json())
             .then(json => {
                 if (json.success) {
+                    setOpen(true);
                     setSeverity('success');
                 } else {
+                    setOpen(true);
                     setSeverity('error');
                 }
                 setMessage(json.message);
+            })
+            .catch(err => {
+                setOpen(true);
+                setSeverity('error');
+                setMessage('Something went wrong, please try again later');
             });
     }
 
@@ -91,7 +107,6 @@ const Login = props => {
                                 Forget Your Password?
                             </Link>
                             <ActionButton actionType={'submit'} onClickEvent={handleSubmit} title="LOGIN" />
-                            <BasicAlerts severity={severity} text={message} />
                             <GoogleButton title="Login With Google" />
                         </form>
                         <div style={{ marginTop: '40px' }}>
@@ -108,6 +123,7 @@ const Login = props => {
                     </div>
                 </div>
             </div>
+            <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
         </div>
     );
 };

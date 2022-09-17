@@ -6,6 +6,7 @@ import ActionButton from './inputs/actionButton';
 import GoogleButton from './inputs/googleButton';
 import { Link } from 'react-router-dom';
 import LeftSideImage from './inputs/leftSideImage';
+import BasicAlerts from './small-components/alert';
 
 const Signup = props => {
     const { setToken } = props;
@@ -14,6 +15,9 @@ const Signup = props => {
     const [firstName, setFirstName] = React.useState();
     const [lastName, setLastName] = React.useState();
     const [email, setEmail] = React.useState();
+    const [message, setMessage] = React.useState();
+    const [severity, setSeverity] = React.useState();
+    const [open, setOpen] = React.useState(false);
 
     const textStyle = {
         justifyContent: 'center',
@@ -24,6 +28,13 @@ const Signup = props => {
     const alignItemStyle = {
         justifyContent: 'center',
         display: 'flex',
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
     };
 
     const handleSubmit = async e => {
@@ -39,7 +50,7 @@ const Signup = props => {
     };
 
     async function signupUser(body) {
-        return fetch('https://express-js-api.vercel.app/api/v1/signup/', {
+        return await fetch('https://express-js-api.vercel.app/api/v1/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,9 +58,21 @@ const Signup = props => {
             body: JSON.stringify(body),
         })
             .then(data => data.json())
-            .then(json => {})
+            .then(json => {
+                console.log(json);
+                if (json.success) {
+                    setOpen(true);
+                    setSeverity('success');
+                } else {
+                    setOpen(true);
+                    setSeverity('error');
+                }
+                setMessage(json.message);
+                return json;
+            })
             .catch(err => {
-                console.log('error');
+                console.log('something went wrong, please try again later');
+                return undefined;
             });
     }
 
@@ -129,6 +152,7 @@ const Signup = props => {
                     </div>
                 </div>
             </div>
+            <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
         </div>
     );
 };

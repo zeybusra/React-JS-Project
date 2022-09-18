@@ -4,8 +4,8 @@ import CardTemplate from './card';
 import ProgressTemp from './small-components/progress';
 import { Navigate } from 'react-router-dom';
 
-const MyProfile = () => {
-    const [authenticated, setAuthenticated] = React.useState(localStorage.getItem('authenticated'));
+const MyProfile = props => {
+    const { token, authenticated } = props;
 
     if (!authenticated) {
         return <Navigate replace to="/login" />;
@@ -26,8 +26,10 @@ const MyProfile = () => {
                 </div>
 
                 <div className={'row'}>
+                    <CardTemplate key={1232} name={'zey'} surname={'zeyb'} />
                     {/*{this.state.users.map(user => {*/}
-                    return <CardTemplate key={1232} name={'zey'} surname={'zeyb'} />;{/*})}*/}
+                    {/*    return <CardTemplate key={1232} name={'zey'} surname={'zeyb'} />;*/}
+                    {/*})}*/}
                 </div>
             </Container>
         );

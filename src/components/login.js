@@ -12,16 +12,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = props => {
     const navigate = useNavigate();
-    const { setToken } = props;
+    const { setToken, authenticated, setAuthenticated } = props;
     const [usernameOrEmail, setUsernameOrEmail] = useState();
     const [password, setPassword] = useState();
     const [message, setMessage] = useState();
     const [severity, setSeverity] = useState();
     const [open, setOpen] = useState(false);
-
-    const [authenticated, setAuthenticated] = useState(
-        localStorage.getItem(localStorage.getItem('authenticated') || false)
-    );
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -35,8 +31,6 @@ const Login = props => {
             .then(data => data.json())
             .then(json => {
                 if (json.success) {
-                    setOpen(true);
-                    setSeverity('success');
                     if (json.credentials.accessToken) {
                         setAuthenticated(true);
                         setToken(json.credentials.accessToken);

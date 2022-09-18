@@ -33,7 +33,6 @@ const MyProfile = props => {
         return <Navigate replace to="/login" />;
     } else {
         // TODO: add logout button
-        // TODO: add navbar and footer for all 'after login' pages
         return (
             <Container>
                 <h2 style={{ textDecorationColor: 'black', fontSize: '25px', paddingTop: '80px' }}>

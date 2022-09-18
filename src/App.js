@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import Layout from './components/layout';
+import UserLayout from './components/userLayout';
+import AuthLayout from './components/authLayout';
 import OnLoadingUseEffect from './components/onLoadingUseEffect';
 import ClickButtonUseEffect from './components/clickButtonUseEffect';
 import Login from './components/login';
@@ -17,8 +18,17 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout />}>
-                    {/*<Route index element={<Login />} />*/}
+                <Route path="/" element={<UserLayout />}>
+                    <Route path="dashboard" element={<OnLoadingUseEffect />} />
+                    <Route path="dashboard2" element={<ClickButtonUseEffect />} />
+                    <Route
+                        path="profile"
+                        element={<MyProfile token={token} userId={userId} authenticated={authenticated} />}
+                    />
+                    <Route path="test" element={<Component />} />
+                </Route>
+
+                <Route path="/" element={<AuthLayout />}>
                     <Route
                         path="login"
                         element={
@@ -41,19 +51,7 @@ export default function App() {
                             />
                         }
                     />
-                    <Route path="dashboard" element={<OnLoadingUseEffect />} />
-                    <Route path="dashboard2" element={<ClickButtonUseEffect />} />
-                    <Route
-                        path="profile"
-                        element={<MyProfile token={token} userId={userId} authenticated={authenticated} />}
-                    />
-                    <Route path="test" element={<Component />} />
                 </Route>
-
-                {/*<Route path="/" element={<Layout_LoggedIn />}>*/}
-                {/*    /!*<Route index element={<Login />} />*!/*/}
-                {/*    <Route path="account" element={<Account />} />*/}
-                {/*</Route>*/}
             </Routes>
         </BrowserRouter>
     );

@@ -1,19 +1,18 @@
 import React from 'react';
-// import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
 import Navbar from './helper/navbar';
 import Footer from './helper/footer';
 
-const Layout = () => {
+const UserLayout = () => {
     return (
         <>
-            {/*<Navbar/>*/}
+            <Navbar />
             <div>
                 <Outlet />
             </div>
-            {/*<Footer/>*/}
+            <Footer />
         </>
     );
 };
 
-export default Layout;
+export default UserLayout;

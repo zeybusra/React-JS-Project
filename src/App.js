@@ -10,8 +10,9 @@ import MyProfile from './components/myProfile';
 import { Component } from './TEST';
 
 export default function App() {
-    const [token, setToken] = React.useState();
+    const [token, setToken] = useState(localStorage.getItem('accessToken'));
     const [authenticated, setAuthenticated] = useState(localStorage.getItem('authenticated') || false);
+    const [userId, setUserId] = useState(localStorage.getItem('userId'));
 
     return (
         <BrowserRouter>
@@ -25,6 +26,7 @@ export default function App() {
                                 authenticated={authenticated}
                                 setAuthenticated={setAuthenticated}
                                 setToken={setToken}
+                                setUserId={setUserId}
                             />
                         }
                     />
@@ -35,6 +37,7 @@ export default function App() {
                                 authenticated={authenticated}
                                 setAuthenticated={setAuthenticated}
                                 setToken={setToken}
+                                setUserId={setUserId}
                             />
                         }
                     />
@@ -42,7 +45,7 @@ export default function App() {
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route
                         path="profile"
-                        element={<MyProfile token={token} authenticated={authenticated} />}
+                        element={<MyProfile token={token} userId={userId} authenticated={authenticated} />}
                     />
                     <Route path="test" element={<Component />} />
                 </Route>

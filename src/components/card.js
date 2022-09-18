@@ -1,15 +1,17 @@
 import Card from 'react-bootstrap/Card';
 
 function CardTemplate(props) {
-    const { name, surname } = props;
-    const full_name = name + ' ' + surname;
+    const { firstName, lastName, userName, profilePictureLocation } = props;
     return (
         <div className={'col-4'}>
-            <Card style={{
-                marginTop: '70px',
-                borderRadius:'15px',
-                minHeight: '400px',
-            }}>
+            <Card
+                style={{
+                    marginTop: '70px',
+                    borderRadius: '15px',
+                    minHeight: '400px',
+                }}
+            >
+                {/* TODO: Add change profile picture component/page/button */}
                 <Card.Img
                     style={{
                         width: '120px',
@@ -19,14 +21,14 @@ function CardTemplate(props) {
                         marginTop: '20px',
                     }}
                     variant="top"
-                    src={require('./Image/3551911.jpg')}
+                    src={profilePictureLocation}
                 />
                 <Card.Body>
                     <Card.Title style={{ display: 'flex', justifyContent: 'center' }}>Profile</Card.Title>
                     <Card.Text>
-                        {full_name ? (
-                            <h6 style={{ marginTop: '30px' }}>Kullanıcı adı: {full_name} </h6>
-                        ) : null}
+                        <h6 style={{ marginTop: '30px' }}>Name: {firstName} </h6>
+                        <h6 style={{ marginTop: '30px' }}>Surname: {lastName} </h6>
+                        <h6 style={{ marginTop: '30px' }}>Username: {userName} </h6>
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -35,5 +37,3 @@ function CardTemplate(props) {
 }
 
 export default CardTemplate;
-
-

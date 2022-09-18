@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = props => {
     const navigate = useNavigate();
-    const { setToken, authenticated, setAuthenticated } = props;
+    const { setToken, authenticated, setAuthenticated, setUserId } = props;
     const [usernameOrEmail, setUsernameOrEmail] = useState();
     const [password, setPassword] = useState();
     const [message, setMessage] = useState();
@@ -20,6 +20,7 @@ const Login = props => {
     const [open, setOpen] = useState(false);
 
     const handleSubmit = async e => {
+        // TODO: when user clicks on login button, disable the button and show a loading animation
         e.preventDefault();
         return await fetch('https://express-js-api.vercel.app/api/v1/login/', {
             method: 'POST',
@@ -32,10 +33,15 @@ const Login = props => {
             .then(json => {
                 if (json.success) {
                     if (json.credentials.accessToken) {
-                        setAuthenticated(true);
                         setToken(json.credentials.accessToken);
                         localStorage.setItem('accessToken', json.credentials.accessToken);
+
+                        setUserId(json.data._id);
+                        localStorage.setItem('userId', json.data._id);
+
+                        setAuthenticated(true);
                         localStorage.setItem('authenticated', true);
+
                         navigate('/profile');
                     }
                 } else {

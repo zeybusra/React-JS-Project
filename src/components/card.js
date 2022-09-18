@@ -25,11 +25,10 @@ function CardTemplate(props) {
                 />
                 <Card.Body>
                     <Card.Title style={{ display: 'flex', justifyContent: 'center' }}>Profile</Card.Title>
-                    <Card.Text>
-                        <h6 style={{ marginTop: '30px' }}>Name: {firstName} </h6>
-                        <h6 style={{ marginTop: '30px' }}>Surname: {lastName} </h6>
-                        <h6 style={{ marginTop: '30px' }}>Username: {userName} </h6>
-                    </Card.Text>
+
+                    <Card.Text style={{ marginTop: '30px' }}>Name: {firstName}</Card.Text>
+                    <Card.Text style={{ marginTop: '30px' }}>Surname: {lastName}</Card.Text>
+                    <Card.Text style={{ marginTop: '30px' }}>Username: {userName}</Card.Text>
                 </Card.Body>
             </Card>
         </div>

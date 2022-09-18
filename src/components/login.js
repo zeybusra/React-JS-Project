@@ -121,7 +121,7 @@ const Login = props => {
                                 <GoogleButton title="Login With Google" />
                             </form>
                             <div style={{ marginTop: '40px' }}>
-                                <h6 style={textStyle}>
+                                <p style={textStyle}>
                                     Don't have an account?
                                     <Link
                                         style={{
@@ -133,7 +133,7 @@ const Login = props => {
                                     >
                                         Sign up
                                     </Link>
-                                </h6>
+                                </p>
                             </div>
                         </div>
                     </div>

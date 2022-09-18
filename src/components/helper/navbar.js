@@ -3,10 +3,27 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css';
 
 function NavbarFrame(props) {
+    const { setAuthenticated, setUserId, setToken } = props;
+    const navigate = useNavigate();
+    const logout = () => {
+        setToken(undefined);
+        localStorage.removeItem('accessToken');
+
+        setUserId(undefined);
+        localStorage.removeItem('userId');
+
+        setAuthenticated(false);
+        localStorage.removeItem('authenticated');
+
+        navigate('/login');
+    };
+
     return (
         <Navbar className={'navbarComponent'} collapseOnSelect expand="lg" variant="dark">
             <Container>
@@ -24,9 +41,8 @@ function NavbarFrame(props) {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">İletişim</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Üye girişi
-                        </Nav.Link>
+                        <Nav.Link eventKey={2}>Üye girişi</Nav.Link>
+                        <Nav.Link onClick={logout}>Çıkış Yap</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -18,7 +18,16 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<UserLayout />}>
+                <Route
+                    path="/"
+                    element={
+                        <UserLayout
+                            setAuthenticated={setAuthenticated}
+                            setUserId={setUserId}
+                            setToken={setToken}
+                        />
+                    }
+                >
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route

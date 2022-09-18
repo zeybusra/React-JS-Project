@@ -32,7 +32,6 @@ const MyProfile = props => {
     if (!authenticated) {
         return <Navigate replace to="/login" />;
     } else {
-        // TODO: add logout button
         return (
             <Container>
                 <h2 style={{ textDecorationColor: 'black', fontSize: '25px', paddingTop: '80px' }}>

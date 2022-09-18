@@ -1,12 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from './helper/navbar';
+import NavbarFrame from './helper/navbar';
 import Footer from './helper/footer';
 
-const UserLayout = () => {
+const UserLayout = props => {
+    const { setAuthenticated, setUserId, setToken } = props;
+
     return (
         <>
-            <Navbar />
+            <NavbarFrame setAuthenticated={setAuthenticated} setUserId={setUserId} setToken={setToken} />
             <div>
                 <Outlet />
             </div>

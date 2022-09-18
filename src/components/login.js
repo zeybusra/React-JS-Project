@@ -4,7 +4,7 @@ import Input from './inputs/input';
 import PasswordInput from './inputs/passwordInput';
 import ActionButton from './inputs/actionButton';
 import GoogleButton from './inputs/googleButton';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import LeftSideImage from './inputs/leftSideImage';
 import PropTypes from 'prop-types';
 import BasicAlerts from './small-components/alert';
@@ -85,52 +85,63 @@ const Login = props => {
         display: 'flex',
     };
     //Style End
+    if (authenticated) {
+        return <Navigate replace to="/profile" />;
+    } else {
+        return (
+            <div>
+                <div className={'row'}>
+                    <div className={'col-6'}>
+                        <LeftSideImage />
+                    </div>
 
-    return (
-        <div>
-            <div className={'row'}>
-                <div className={'col-6'}>
-                    <LeftSideImage />
-                </div>
+                    <div style={alignItemStyle} className={'col-6'}>
+                        <div className={'authFormContainer'}>
+                            <h3 className="title">Welcome to Chanel</h3>
+                            <form onSubmit={handleSubmit}>
+                                <div className="col-12">
+                                    <Input
+                                        onChangeEvent={setUsernameOrEmail}
+                                        name="usernameOrEmail"
+                                        label="Username or Email"
+                                    />
+                                </div>
+                                <div className="col-12">
+                                    <PasswordInput
+                                        onChangeEvent={setPassword}
+                                        name="password"
+                                        label="Password"
+                                    />
+                                </div>
 
-                <div style={alignItemStyle} className={'col-6'}>
-                    <div className={'authFormContainer'}>
-                        <h3 className="title">Welcome to Chanel</h3>
-                        <form onSubmit={handleSubmit}>
-                            <div className="col-12">
-                                <Input
-                                    onChangeEvent={setUsernameOrEmail}
-                                    name="usernameOrEmail"
-                                    label="Username or Email"
-                                />
-                            </div>
-                            <div className="col-12">
-                                <PasswordInput onChangeEvent={setPassword} name="password" label="Password" />
-                            </div>
-
-                            <Link style={forgetPassword} to="/">
-                                Forget Your Password?
-                            </Link>
-                            <ActionButton actionType={'submit'} title="LOGIN" />
-                            <GoogleButton title="Login With Google" />
-                        </form>
-                        <div style={{ marginTop: '40px' }}>
-                            <h6 style={textStyle}>
-                                Don't have an account?
-                                <Link
-                                    style={{ textDecoration: 'none', color: '#9c27b0', paddingLeft: '10px' }}
-                                    to="/signup"
-                                >
-                                    Sign up
+                                <Link style={forgetPassword} to="/">
+                                    Forget Your Password?
                                 </Link>
-                            </h6>
+                                <ActionButton actionType={'submit'} title="LOGIN" />
+                                <GoogleButton title="Login With Google" />
+                            </form>
+                            <div style={{ marginTop: '40px' }}>
+                                <h6 style={textStyle}>
+                                    Don't have an account?
+                                    <Link
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: '#9c27b0',
+                                            paddingLeft: '10px',
+                                        }}
+                                        to="/signup"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
             </div>
-            <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
-        </div>
-    );
+        );
+    }
 };
 
 Login.propTypes = {

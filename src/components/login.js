@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './signup.css';
 import Input from './inputs/input';
 import PasswordInput from './inputs/passwordInput';
@@ -8,23 +8,55 @@ import { Link } from 'react-router-dom';
 import LeftSideImage from './inputs/leftSideImage';
 import PropTypes from 'prop-types';
 import BasicAlerts from './small-components/alert';
+import { useNavigate } from 'react-router-dom';
 
 const Login = props => {
+    const navigate = useNavigate();
     const { setToken } = props;
-    const [usernameOrEmail, setUsernameOrEmail] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [message, setMessage] = React.useState();
-    const [severity, setSeverity] = React.useState();
-    const [open, setOpen] = React.useState(false);
+    const [usernameOrEmail, setUsernameOrEmail] = useState();
+    const [password, setPassword] = useState();
+    const [message, setMessage] = useState();
+    const [severity, setSeverity] = useState();
+    const [open, setOpen] = useState(false);
+
+    const [authenticated, setAuthenticated] = useState(
+        localStorage.getItem(localStorage.getItem('authenticated') || false)
+    );
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
-            usernameOrEmail,
-            password,
-        });
-        setToken(token);
+        return await fetch('https://express-js-api.vercel.app/api/v1/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ usernameOrEmail, password }),
+        })
+            .then(data => data.json())
+            .then(json => {
+                if (json.success) {
+                    setOpen(true);
+                    setSeverity('success');
+                    if (json.credentials.accessToken) {
+                        setAuthenticated(true);
+                        setToken(json.credentials.accessToken);
+                        localStorage.setItem('accessToken', json.credentials.accessToken);
+                        localStorage.setItem('authenticated', true);
+                        navigate('/profile');
+                    }
+                } else {
+                    setOpen(true);
+                    setSeverity('error');
+                }
+                setMessage(json.message);
+            })
+            .catch(err => {
+                setOpen(true);
+                setSeverity('error');
+                setMessage('Something went wrong, please try again later');
+            });
     };
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -48,38 +80,11 @@ const Login = props => {
         textDecoration: 'none',
         paddingLeft: '10px',
     };
-
     const alignItemStyle = {
         justifyContent: 'center',
         display: 'flex',
     };
     //Style End
-
-    async function loginUser(credentials) {
-        return fetch('https://express-js-api.vercel.app/api/v1/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-        })
-            .then(data => data.json())
-            .then(json => {
-                if (json.success) {
-                    setOpen(true);
-                    setSeverity('success');
-                } else {
-                    setOpen(true);
-                    setSeverity('error');
-                }
-                setMessage(json.message);
-            })
-            .catch(err => {
-                setOpen(true);
-                setSeverity('error');
-                setMessage('Something went wrong, please try again later');
-            });
-    }
 
     return (
         <div>
@@ -127,7 +132,9 @@ const Login = props => {
         </div>
     );
 };
-export default Login;
+
 Login.propTypes = {
     setToken: PropTypes.func.isRequired,
 };
+
+export default Login;

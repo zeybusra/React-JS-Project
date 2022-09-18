@@ -27,6 +27,7 @@ const PasswordInput = props => {
                 size="small"
                 label={label}
                 required={required}
+                inputProps={{ maxLength: 256, minLength: 6 }}
             />
             {passwordType === 'password' ? (
                 <FontAwesomeIcon onClick={togglePassword} icon={faEyeSlash} fixedWidth shake />

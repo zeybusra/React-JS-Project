@@ -19,13 +19,12 @@ const Login = props => {
     const [severity, setSeverity] = useState();
     const [open, setOpen] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async e => {
-        // TODO: when user clicks on login button, disable the button
-        //  show a loading animation on the button or on the whole page
-        //  disable input fields
         e.preventDefault();
         setIsDisabled(true);
+        setLoading(true);
 
         return await fetch('https://express-js-api.vercel.app/api/v1/login/', {
             method: 'POST',
@@ -62,6 +61,7 @@ const Login = props => {
             })
             .then(() => {
                 setIsDisabled(false);
+                setLoading(false);
             });
     };
 
@@ -114,6 +114,7 @@ const Login = props => {
                                         onChangeEvent={setUsernameOrEmail}
                                         name="usernameOrEmail"
                                         label="Username or Email"
+                                        isDisabled={isDisabled}
                                     />
                                 </div>
                                 <div className="col-12">
@@ -121,13 +122,19 @@ const Login = props => {
                                         onChangeEvent={setPassword}
                                         name="password"
                                         label="Password"
+                                        isDisabled={isDisabled}
                                     />
                                 </div>
 
                                 <Link style={forgetPassword} to="/">
                                     Forget Your Password?
                                 </Link>
-                                <ActionButton actionType={'submit'} title="LOGIN" isDisabled={isDisabled} />
+                                <ActionButton
+                                    actionType={'submit'}
+                                    title="LOGIN"
+                                    isDisabled={isDisabled}
+                                    loading={loading}
+                                />
                                 <GoogleButton title="Login With Google" />
                             </form>
                             <div style={{ marginTop: '40px' }}>

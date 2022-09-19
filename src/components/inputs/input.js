@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 
 const Input = props => {
-    const { label, name, onChangeEvent, type, required } = props;
+    const { label, name, onChangeEvent, type, required, isDisabled } = props;
 
     return (
         <div className="input-text">
@@ -17,6 +17,7 @@ const Input = props => {
                 type={type ? type : 'text'}
                 required={required}
                 inputProps={{ maxLength: 256, minLength: 3 }}
+                disabled={isDisabled}
             />
         </div>
     );

@@ -4,12 +4,12 @@ import Input from './inputs/input';
 import PasswordInput from './inputs/passwordInput';
 import ActionButton from './inputs/actionButton';
 import GoogleButton from './inputs/googleButton';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import LeftSideImage from './inputs/leftSideImage';
 import BasicAlerts from './small-components/alert';
 
 const Signup = props => {
-    const { setToken } = props;
+    const { setToken, authenticated } = props;
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
     const [firstName, setFirstName] = React.useState();
@@ -76,84 +76,87 @@ const Signup = props => {
             });
     }
 
-    // TODO 1: if user is already logged in, redirect to profile page
     return (
         <div>
-            <div className={'row'}>
-                <div className={'col-6'}>
-                    <LeftSideImage />
-                </div>
+            {authenticated ? (
+                <Navigate to="/profile" />
+            ) : (
+                <div className={'row'}>
+                    <div className={'col-6'}>
+                        <LeftSideImage />
+                    </div>
 
-                <div style={alignItemStyle} className={'col-6'}>
-                    <div className={'authFormContainer'}>
-                        <h3 className="title">Welcome to Chanel</h3>
-                        <form onSubmit={handleSubmit}>
-                            <div className="row" style={alignItemStyle}>
-                                <div className="col-6">
-                                    <Input
-                                        onChangeEvent={setFirstName}
-                                        name="name"
-                                        label="Name"
-                                        required={true}
-                                    />
-                                </div>
+                    <div style={alignItemStyle} className={'col-6'}>
+                        <div className={'authFormContainer'}>
+                            <h3 className="title">Welcome to Chanel</h3>
+                            <form onSubmit={handleSubmit}>
+                                <div className="row" style={alignItemStyle}>
+                                    <div className="col-6">
+                                        <Input
+                                            onChangeEvent={setFirstName}
+                                            name="name"
+                                            label="Name"
+                                            required={true}
+                                        />
+                                    </div>
 
-                                <div className="col-6">
-                                    <Input
-                                        onChangeEvent={setLastName}
-                                        name="surname"
-                                        label="Surname"
-                                        required={true}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="row" style={alignItemStyle}>
-                                <div className="col-12">
-                                    <Input
-                                        onChangeEvent={setEmail}
-                                        name="email"
-                                        label="Mail"
-                                        type={'email'}
-                                        required={true}
-                                    />
-                                    <Input
-                                        onChangeEvent={setUsername}
-                                        name="username"
-                                        label="Username"
-                                        required={true}
-                                    />
-                                    <PasswordInput
-                                        onChangeEvent={setPassword}
-                                        name="password"
-                                        label="Password"
-                                        required={true}
-                                    />
-                                    <ActionButton actionType={'submit'} title="SIGN UP" />
-                                    <GoogleButton title="Sign up With Google" />
-
-                                    <div style={{ marginTop: '40px' }}>
-                                        <h6 style={textStyle}>
-                                            Already have an account?
-                                            <Link
-                                                style={{
-                                                    textDecoration: 'none',
-                                                    color: '#9c27b0',
-                                                    paddingLeft: '10px',
-                                                }}
-                                                to="/login"
-                                            >
-                                                Login
-                                            </Link>
-                                        </h6>
+                                    <div className="col-6">
+                                        <Input
+                                            onChangeEvent={setLastName}
+                                            name="surname"
+                                            label="Surname"
+                                            required={true}
+                                        />
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                <div className="row" style={alignItemStyle}>
+                                    <div className="col-12">
+                                        <Input
+                                            onChangeEvent={setEmail}
+                                            name="email"
+                                            label="Mail"
+                                            type={'email'}
+                                            required={true}
+                                        />
+                                        <Input
+                                            onChangeEvent={setUsername}
+                                            name="username"
+                                            label="Username"
+                                            required={true}
+                                        />
+                                        <PasswordInput
+                                            onChangeEvent={setPassword}
+                                            name="password"
+                                            label="Password"
+                                            required={true}
+                                        />
+                                        <ActionButton actionType={'submit'} title="SIGN UP" />
+                                        <GoogleButton title="Sign up With Google" />
+
+                                        <div style={{ marginTop: '40px' }}>
+                                            <h6 style={textStyle}>
+                                                Already have an account?
+                                                <Link
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: '#9c27b0',
+                                                        paddingLeft: '10px',
+                                                    }}
+                                                    to="/login"
+                                                >
+                                                    Login
+                                                </Link>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                    <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
                 </div>
-            </div>
-            <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
+            )}
         </div>
     );
 };

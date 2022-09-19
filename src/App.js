@@ -28,6 +28,7 @@ export default function App() {
                         />
                     }
                 >
+                    {/* TODO: add login required middleware for this route */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route

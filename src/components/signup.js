@@ -76,6 +76,7 @@ const Signup = props => {
             });
     }
 
+    // TODO: if user is already logged in, redirect to profile page
     return (
         <div>
             <div className={'row'}>

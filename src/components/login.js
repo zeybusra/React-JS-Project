@@ -18,10 +18,15 @@ const Login = props => {
     const [message, setMessage] = useState();
     const [severity, setSeverity] = useState();
     const [open, setOpen] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const handleSubmit = async e => {
-        // TODO: when user clicks on login button, disable the button and show a loading animation
+        // TODO: when user clicks on login button, disable the button
+        //  show a loading animation on the button or on the whole page
+        //  disable input fields
         e.preventDefault();
+        setIsDisabled(true);
+
         return await fetch('https://express-js-api.vercel.app/api/v1/login/', {
             method: 'POST',
             headers: {
@@ -54,6 +59,9 @@ const Login = props => {
                 setOpen(true);
                 setSeverity('error');
                 setMessage('Something went wrong, please try again later');
+            })
+            .then(() => {
+                setIsDisabled(false);
             });
     };
 
@@ -85,6 +93,8 @@ const Login = props => {
         display: 'flex',
     };
     //Style End
+
+    // TODO: create forgot password link and page
     if (authenticated) {
         return <Navigate replace to="/profile" />;
     } else {
@@ -117,7 +127,7 @@ const Login = props => {
                                 <Link style={forgetPassword} to="/">
                                     Forget Your Password?
                                 </Link>
-                                <ActionButton actionType={'submit'} title="LOGIN" />
+                                <ActionButton actionType={'submit'} title="LOGIN" isDisabled={isDisabled} />
                                 <GoogleButton title="Login With Google" />
                             </form>
                             <div style={{ marginTop: '40px' }}>

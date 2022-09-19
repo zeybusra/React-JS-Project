@@ -11,7 +11,7 @@ function CardTemplate(props) {
                     minHeight: '400px',
                 }}
             >
-                {/* TODO: Add change profile picture component/page/button */}
+                {/* TODO 2: Add change profile picture component/page/button */}
                 <Card.Img
                     style={{
                         width: '120px',

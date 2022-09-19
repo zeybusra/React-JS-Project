@@ -28,7 +28,9 @@ export default function App() {
                         />
                     }
                 >
-                    {/* TODO: add login required middleware for this route */}
+                    {/* TODO 7: add login required middleware for this route */}
+                    {/* TODO 4: add users list page with a data-table */}
+                    {/* TODO 5: remove unnecessary pages from routes */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route

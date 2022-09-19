@@ -12,7 +12,7 @@ const MyProfile = props => {
     const [profilePictureLocation, setProfilePictureLocation] = useState();
 
     useEffect(() => {
-        // TODO: Create a request service for all the requests in the app
+        // TODO 6: Create a request service for all the requests in the app
         fetch('https://express-js-api.vercel.app/api/v1/users/' + userId, {
             headers: {
                 'Content-Type': 'application/json',

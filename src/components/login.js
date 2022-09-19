@@ -94,7 +94,7 @@ const Login = props => {
     };
     //Style End
 
-    // TODO: create forgot password link and page
+    // TODO 3: create forgot password link and page
     if (authenticated) {
         return <Navigate replace to="/profile" />;
     } else {

@@ -1,7 +1,52 @@
 import Card from 'react-bootstrap/Card';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
+import React from 'react';
+import ActionButton from './inputs/actionButton';
 
 function CardTemplate(props) {
-    const { firstName, lastName, userName, profilePictureLocation } = props;
+    const { firstName, lastName, userName, profilePictureLocation, token } = props;
+    const [selectedFile, setSelectedFile] = React.useState(null);
+
+    const onFileChange = event => {
+        setSelectedFile(event.target.files[0]);
+        console.log(selectedFile);
+        console.log(event.target.files[0]);
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const formData = new FormData();
+        // TODO: fix form data error
+        formData.append('file', selectedFile, selectedFile.name);
+        return await uploadProfilePicture(formData);
+    };
+
+    async function uploadProfilePicture(body) {
+        return await fetch('https://express-js-api.vercel.app/api/v1/upload_profile_picture', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(body),
+        })
+            .then(data => data.json())
+            .then(json => {
+                console.log(json);
+                return json;
+            })
+            .catch(err => {
+                console.log('err');
+                console.log(err);
+                console.log('something went wrong, please try again later');
+                return undefined;
+            });
+    }
+
+    // TODO 2.1: Add change profile picture component/page/button
+    // TODO 2.2: Add remove profile picture button
     return (
         <div className={'col-4'}>
             <Card
@@ -11,6 +56,20 @@ function CardTemplate(props) {
                     minHeight: '400px',
                 }}
             >
+                <form onSubmit={handleSubmit}>
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+                            <input hidden accept="image/*" type="file" onChange={onFileChange} />
+                            <PhotoCamera />
+                        </IconButton>
+                    </Stack>
+                    <ActionButton
+                        title={'Change Profile Picture'}
+                        actionType={'submit'}
+                        isDisabled={false}
+                        loading={false}
+                    />
+                </form>
                 <Card.Img
                     style={{
                         width: '120px',

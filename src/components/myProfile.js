@@ -29,12 +29,6 @@ const MyProfile = props => {
             .catch(error => console.log('error', error));
     }, []);
 
-    {
-        /* TODO 2.1: Add change profile picture component/page/button */
-    }
-    {
-        /* TODO 2.2: Add remove profile picture button */
-    }
     if (!authenticated) {
         return <Navigate replace to="/login" />;
     } else {
@@ -59,6 +53,7 @@ const MyProfile = props => {
                         firstName={firstName}
                         lastName={lastName}
                         profilePictureLocation={profilePictureLocation}
+                        token={token}
                     />
                     {/*{this.state.users.map(user => {*/}
                     {/*    return <CardTemplate key={1232} name={'zey'} surname={'zeyb'} />;*/}

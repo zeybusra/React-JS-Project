@@ -9,6 +9,8 @@ const ForgotPassword = props => {
     const [severity, setSeverity] = useState();
     const [usernameOrEmail, setUsernameOrEmail] = useState();
     const [open, setOpen] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -19,6 +21,8 @@ const ForgotPassword = props => {
 
     const resetPassword = async e => {
         e.preventDefault();
+        setIsDisabled(true);
+        setLoading(true);
 
         return await fetch('https://express-js-api.vercel.app/api/v1/reset_password_request/?lang=en', {
             method: 'POST',
@@ -37,6 +41,10 @@ const ForgotPassword = props => {
                 setSeverity('error');
                 setMessage('Something went wrong, please try again later');
                 setOpen(true);
+            })
+            .then(() => {
+                setIsDisabled(false);
+                setLoading(false);
             });
     };
 
@@ -49,11 +57,17 @@ const ForgotPassword = props => {
                         <form onSubmit={resetPassword}>
                             <div className="col-12">
                                 <Input
+                                    isDisabled={isDisabled}
                                     name="usernameOrEmail"
                                     onChangeEvent={setUsernameOrEmail}
                                     label="Username or Email"
                                 />
-                                <ActionButton actionType={'submit'} title={'Reset Password'} />
+                                <ActionButton
+                                    isDisabled={isDisabled}
+                                    actionType={'submit'}
+                                    title={'Reset Password'}
+                                    loading={loading}
+                                />
                             </div>
                         </form>
                     </div>

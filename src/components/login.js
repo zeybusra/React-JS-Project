@@ -126,7 +126,7 @@ const Login = props => {
                                     />
                                 </div>
 
-                                <Link style={forgetPassword} to="/">
+                                <Link style={forgetPassword} to="/forgot-password">
                                     Forget Your Password?
                                 </Link>
                                 <ActionButton

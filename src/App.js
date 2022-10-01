@@ -9,6 +9,7 @@ import Signup from './components/signup';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyProfile from './components/myProfile';
 import { Component } from './TEST';
+import ForgotPassword from './components/forgotPassword';
 
 export default function App() {
     const [token, setToken] = useState(localStorage.getItem('accessToken'));
@@ -33,6 +34,7 @@ export default function App() {
                     {/* TODO 5: remove unnecessary pages from routes */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
+                    <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route
                         path="profile"
                         element={<MyProfile token={token} userId={userId} authenticated={authenticated} />}
@@ -52,6 +54,7 @@ export default function App() {
                             />
                         }
                     />
+
                     <Route
                         path="signup"
                         element={

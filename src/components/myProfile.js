@@ -18,6 +18,7 @@ const MyProfile = props => {
 
     useEffect(() => {
         // TODO 6: Create a request service for all the requests in the app
+        // https://axios-http.com/docs/intro
         fetch('https://express-js-api.vercel.app/api/v1/users/' + userId, {
             headers: {
                 'Content-Type': 'application/json',

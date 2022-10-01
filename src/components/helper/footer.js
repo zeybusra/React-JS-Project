@@ -5,7 +5,7 @@ function Footer(props) {
     const url = 'https://zeynepbusra.com';
     return (
         <div>
-            <footer className="footer fixed-bottom">
+            <footer className="footer">
                 <a className={'text'} href={url}>
                     Zeynep Büşra Ünal
                 </a>

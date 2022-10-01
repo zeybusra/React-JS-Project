@@ -97,6 +97,20 @@ const MyProfile = props => {
                         profilePictureLocation={profilePictureLocation}
                         token={token}
                     />
+                    <CardTemplate
+                        userName={userName}
+                        firstName={firstName}
+                        lastName={lastName}
+                        profilePictureLocation={profilePictureLocation}
+                        token={token}
+                    />
+                    <CardTemplate
+                        userName={userName}
+                        firstName={firstName}
+                        lastName={lastName}
+                        profilePictureLocation={profilePictureLocation}
+                        token={token}
+                    />
                     {/*{this.state.users.map(user => {*/}
                     {/*    return <CardTemplate key={1232} name={'zey'} surname={'zeyb'} />;*/}
                     {/*})}*/}

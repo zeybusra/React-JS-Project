@@ -51,25 +51,12 @@ function CardTemplate(props) {
         <div className={'col-4'}>
             <Card
                 style={{
-                    marginTop: '70px',
+                    marginTop: '20px',
                     borderRadius: '15px',
                     minHeight: '400px',
                 }}
             >
-                <form onSubmit={handleSubmit}>
-                    <Stack direction="row" alignItems="center" spacing={2}>
-                        <IconButton color="primary" aria-label="upload picture" component="label">
-                            <input hidden accept="image/*" type="file" onChange={onFileChange} />
-                            <PhotoCamera />
-                        </IconButton>
-                    </Stack>
-                    <ActionButton
-                        title={'Change Profile Picture'}
-                        actionType={'submit'}
-                        isDisabled={false}
-                        loading={false}
-                    />
-                </form>
+                <form onSubmit={handleSubmit}></form>
                 <Card.Img
                     style={{
                         width: '120px',
@@ -81,12 +68,30 @@ function CardTemplate(props) {
                     variant="top"
                     src={profilePictureLocation}
                 />
+
                 <Card.Body>
                     <Card.Title style={{ display: 'flex', justifyContent: 'center' }}>Profile</Card.Title>
-
-                    <Card.Text style={{ marginTop: '30px' }}>Name: {firstName}</Card.Text>
-                    <Card.Text style={{ marginTop: '30px' }}>Surname: {lastName}</Card.Text>
-                    <Card.Text style={{ marginTop: '30px' }}>Username: {userName}</Card.Text>
+                    <Stack>
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+                            <input hidden accept="image/*" type="file" onChange={onFileChange} />
+                            <PhotoCamera />
+                        </IconButton>
+                    </Stack>
+                    <ActionButton
+                        title={'Change Profile Picture'}
+                        actionType={'submit'}
+                        isDisabled={false}
+                        loading={false}
+                    />
+                    <Card.Text style={{ marginTop: '30px', textTransform: 'uppercase' }}>
+                        Name: {firstName}
+                    </Card.Text>
+                    <Card.Text style={{ marginTop: '30px', textTransform: 'uppercase' }}>
+                        Surname: {lastName}
+                    </Card.Text>
+                    <Card.Text style={{ marginTop: '30px', textTransform: 'uppercase' }}>
+                        Username: {userName}
+                    </Card.Text>
                 </Card.Body>
             </Card>
         </div>

@@ -10,6 +10,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyProfile from './components/myProfile';
 import { Component } from './TEST';
 import ForgotPassword from './components/forgotPassword';
+import ResetPasswordConfirm from './components/resetPasswordConfirm';
+import ResetPasswordDone from './components/resetPasswordDone';
 
 export default function App() {
     const [token, setToken] = useState(localStorage.getItem('accessToken'));
@@ -35,6 +37,17 @@ export default function App() {
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
+                    <Route path="reset-password-done" element={<ResetPasswordDone />} />
+                    <Route
+                        path="reset-password-confirm"
+                        element={
+                            <ResetPasswordConfirm
+                                token={token}
+                                userId={userId}
+                                authenticated={authenticated}
+                            />
+                        }
+                    />
                     <Route
                         path="profile"
                         element={<MyProfile token={token} userId={userId} authenticated={authenticated} />}

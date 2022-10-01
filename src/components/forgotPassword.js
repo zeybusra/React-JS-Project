@@ -3,8 +3,10 @@ import './signup.css';
 import Input from './inputs/input';
 import ActionButton from './inputs/actionButton';
 import BasicAlerts from './small-components/alert';
+import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = props => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState();
     const [severity, setSeverity] = useState();
     const [usernameOrEmail, setUsernameOrEmail] = useState();
@@ -34,6 +36,10 @@ const ForgotPassword = props => {
             .then(data => data.json())
             .then(json => {
                 setSeverity(json.success ? 'success' : 'error');
+                if (json.success === 'success') {
+                    navigate('/new-password');
+                }
+
                 setMessage(json.message);
                 setOpen(true);
             })

@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import CardTemplate from './card';
-import ProgressTemp from './small-components/progress';
 import { Navigate } from 'react-router-dom';
+import EmptyCardTemplate from './emptyCard';
+import ProgressTemp from './small-components/progress';
+import CalendarTemp from './small-components/calendar';
+import DoughnutChart from './small-components/doughnutChart';
+import ColumnChart from './small-components/columnChart';
+import ScatterChart from './small-components/scatterChart';
 
 const MyProfile = props => {
     const { token, authenticated, userId } = props;
@@ -34,16 +39,53 @@ const MyProfile = props => {
     } else {
         return (
             <Container>
-                <h2 style={{ textDecorationColor: 'black', fontSize: '25px', paddingTop: '80px' }}>
-                    Welcome {firstName}
+                <h2
+                    style={{
+                        textDecorationColor: 'black',
+                        fontSize: '25px',
+                        paddingTop: '80px',
+                        marginBottom: '80px',
+                        fontFamily: 'sans-serif',
+                        textTransform: 'uppercase',
+                        color: '#6a647a',
+                    }}
+                >
+                    WELCOME {firstName}
                 </h2>
 
-                <div style={{ justifyContent: 'center' }} className={'row'}>
-                    <div className={'col-6'} style={{ marginTop: '50px' }}>
-                        <ProgressTemp />
+                <div className={'row'} style={{ marginBottom: '20px', justifyContent: 'center' }}>
+                    <div className={'col-12'}>
+                        <EmptyCardTemplate
+                            title={'Etkinliğe Kaç Gün Kaldı?'}
+                            childrenComponent={<CalendarTemp />}
+                        />
                     </div>
-                    <div className={'col-6'} style={{ marginTop: '50px' }}>
-                        <ProgressTemp />
+                </div>
+
+                <div style={{ marginBottom: '20px', justifyContent: 'center' }} className={'row'}>
+                    <div className={'col-6'}>
+                        <EmptyCardTemplate
+                            title={'Etkinlik Detayları'}
+                            childrenComponent={<DoughnutChart />}
+                        />
+                    </div>
+
+                    <div className={'col-6'}>
+                        <EmptyCardTemplate title={'Kaç kişi geliyor?'} childrenComponent={<ProgressTemp />} />
+                    </div>
+                </div>
+
+                <div style={{ justifyContent: 'center' }} className={'row'}>
+                    <div className={'col-4'}>
+                        <EmptyCardTemplate title={'Kaç kişi geliyor?'} childrenComponent={<ColumnChart />} />
+                    </div>
+
+                    <div style={{ justifyContent: 'center' }} className={'col-4'}>
+                        <EmptyCardTemplate title={'Kaç kişi geliyor?'} childrenComponent={<ScatterChart />} />
+                    </div>
+
+                    <div className={'col-4'}>
+                        <EmptyCardTemplate title={'Kaç kişi geliyor?'} childrenComponent={<ColumnChart />} />
                     </div>
                 </div>
 

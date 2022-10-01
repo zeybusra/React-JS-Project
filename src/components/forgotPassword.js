@@ -10,16 +10,10 @@ const ForgotPassword = props => {
     const [message, setMessage] = useState();
     const [severity, setSeverity] = useState();
     const [usernameOrEmail, setUsernameOrEmail] = useState();
-    const [open, setOpen] = useState(false);
+
     const [isDisabled, setIsDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
+    const { handleClose, open, setOpen } = props;
 
     const resetPassword = async e => {
         e.preventDefault();
@@ -79,7 +73,13 @@ const ForgotPassword = props => {
                     </div>
                 </div>
             </div>
-            <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
+            <BasicAlerts
+                severity={severity}
+                text={message}
+                open={open}
+                setOpen={setOpen}
+                onClose={handleClose}
+            />
         </div>
     );
 };

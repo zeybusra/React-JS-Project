@@ -17,6 +17,14 @@ export default function App() {
     const [token, setToken] = useState(localStorage.getItem('accessToken'));
     const [authenticated, setAuthenticated] = useState(localStorage.getItem('authenticated') || false);
     const [userId, setUserId] = useState(localStorage.getItem('userId'));
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     return (
         <BrowserRouter>
@@ -36,16 +44,15 @@ export default function App() {
                     {/* TODO 5: remove unnecessary pages from routes */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
-                    <Route path="forgot-password" element={<ForgotPassword />} />
+                    <Route
+                        path="forgot-password"
+                        element={<ForgotPassword handleClose={handleClose} setOpen={setOpen} open={open} />}
+                    />
                     <Route path="reset-password-done" element={<ResetPasswordDone />} />
                     <Route
                         path="reset-password-confirm"
                         element={
-                            <ResetPasswordConfirm
-                                token={token}
-                                userId={userId}
-                                authenticated={authenticated}
-                            />
+                            <ResetPasswordConfirm handleClose={handleClose} setOpen={setOpen} open={open} />
                         }
                     />
                     <Route
@@ -64,6 +71,9 @@ export default function App() {
                                 setAuthenticated={setAuthenticated}
                                 setToken={setToken}
                                 setUserId={setUserId}
+                                handleClose={handleClose}
+                                setOpen={setOpen}
+                                open={open}
                             />
                         }
                     />

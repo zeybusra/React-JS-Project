@@ -12,12 +12,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = props => {
     const navigate = useNavigate();
-    const { setToken, authenticated, setAuthenticated, setUserId } = props;
+    const { handleClose, open, setOpen, setToken, authenticated, setAuthenticated, setUserId } = props;
     const [usernameOrEmail, setUsernameOrEmail] = useState();
     const [password, setPassword] = useState();
     const [message, setMessage] = useState();
     const [severity, setSeverity] = useState();
-    const [open, setOpen] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -63,13 +62,6 @@ const Login = props => {
                 setIsDisabled(false);
                 setLoading(false);
             });
-    };
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
     };
 
     //Style Start
@@ -154,7 +146,13 @@ const Login = props => {
                         </div>
                     </div>
                 </div>
-                <BasicAlerts severity={severity} text={message} open={open} onClose={handleClose} />
+                <BasicAlerts
+                    severity={severity}
+                    text={message}
+                    setOpen={setOpen}
+                    open={open}
+                    onClose={handleClose}
+                />
             </div>
         );
     }

@@ -4,6 +4,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 import React from 'react';
 import ActionButton from './inputs/actionButton';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 function CardTemplate(props) {
     const { firstName, lastName, userName, profilePictureLocation, token } = props;
@@ -75,6 +76,7 @@ function CardTemplate(props) {
                         <IconButton color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" type="file" onChange={onFileChange} />
                             <PhotoCamera />
+                            <DeleteRoundedIcon />
                         </IconButton>
                     </Stack>
                     <ActionButton

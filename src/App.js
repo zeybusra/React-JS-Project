@@ -12,6 +12,7 @@ import { Component } from './TEST';
 import ForgotPassword from './components/forgotPassword';
 import ResetPasswordConfirm from './components/resetPasswordConfirm';
 import ResetPasswordDone from './components/resetPasswordDone';
+import DataTable from './components/user';
 
 export default function App() {
     const [token, setToken] = useState(localStorage.getItem('accessToken'));
@@ -44,6 +45,7 @@ export default function App() {
                     {/* TODO 5: remove unnecessary pages from routes */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
+                    <Route path="user-list" element={<DataTable />} />
                     <Route
                         path="forgot-password"
                         element={<ForgotPassword handleClose={handleClose} setOpen={setOpen} open={open} />}

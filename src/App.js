@@ -41,11 +41,13 @@ export default function App() {
                     }
                 >
                     {/* TODO 7: add login required middleware for this route */}
-                    {/* TODO 4: add users list page with a data-table */}
                     {/* TODO 5: remove unnecessary pages from routes */}
                     <Route path="dashboard" element={<OnLoadingUseEffect />} />
                     <Route path="dashboard2" element={<ClickButtonUseEffect />} />
-                    <Route path="user-list" element={<DataTable />} />
+                    <Route
+                        path="user-list"
+                        element={<DataTable token={token} userId={userId} authenticated={authenticated} />}
+                    />
                     <Route
                         path="forgot-password"
                         element={<ForgotPassword handleClose={handleClose} setOpen={setOpen} open={open} />}

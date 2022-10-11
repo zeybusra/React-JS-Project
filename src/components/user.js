@@ -190,7 +190,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function DataTable(props) {
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('email');
+    const [orderBy, setOrderBy] = React.useState('username');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -218,7 +218,7 @@ export default function DataTable(props) {
         fetch(
             `https://express-js-api.vercel.app/api/v1/users/?lang=en&page=${
                 page + 1
-            }&size=${rowsPerPage}&sort=name:1,url_path:1`,
+            }&size=${rowsPerPage}&sort=${orderBy}:${order}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -235,7 +235,7 @@ export default function DataTable(props) {
                 }
             })
             .catch(error => console.log('error', error));
-    }, [page, rowsPerPage]);
+    }, [page, rowsPerPage, order, orderBy]);
 
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
